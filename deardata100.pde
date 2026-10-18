@@ -1,25 +1,54 @@
 void setup(){
 
-size(1000,600);
+size(625,600);
 fill(64);
 noStroke();
 background(#F7AFF6);
 
+noLoop();
+
+
+
 }
  void draw(){
-circle(16,20,20);
 fill(#F7F7F7);
 stroke(0);
 strokeWeight(1);
 
+for (int y = 0; y < height; y++) {
+    float t = map(y, 0, height, 0, 1);
+    color c = lerpColor(color(255, 235, 245), color(255, 0, 128), t);
+    stroke(c);
+    line(0, y, width, y);
+}
+
+noFill();
+stroke(0);
+
+
 int diameter = 20;
 
-for (int i = 0; i < 60; i++) {
+for (int i = 0; i < 30; i++) {
    circle(10 + diameter/2 + i * diameter,
            20, diameter);
+           
+ 
+
+  line(95, 96, 105, 96);
+  line(92, 100, 108, 100);
+  line(95, 104, 105, 104);
+
 
 }
 
+ beginShape();
+
+  for (int y = 0; y <= 60; y += 2) {
+    float x = 22 + sin(y * 0.2) * 3;
+    vertex(x, 32 + y);
+  }
+  
+   endShape();
 
 circle(30,45, 20);
 
@@ -28,3 +57,9 @@ circle(30,45, 20);
   line(95, 104, 105, 104);
 
 
+
+
+ }
+
+
+  
