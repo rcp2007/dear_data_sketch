@@ -28,9 +28,14 @@ stroke(0);
 
 int diameter = 20;
 
-for (int i = 0; i < 30; i++) {
+for (int i = 0; i < 5; i++) {
    circle(10 + diameter/2 + i * diameter,
            20, diameter);
+          
+triangle(116, 10, 126, 30, 106, 30);
+triangle(136, 10, 146, 30, 126, 30);
+
+stroke(3);
            
  
 
@@ -50,11 +55,7 @@ for (int i = 0; i < 30; i++) {
   
    endShape();
 
-circle(30,45, 20);
 
-  line(95, 96, 105, 96);
-  line(92, 100, 108, 100);
-  line(95, 104, 105, 104);
 
 
 
