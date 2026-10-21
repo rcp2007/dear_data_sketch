@@ -5,7 +5,7 @@ fill(64);
 noStroke();
 background(#F7AFF6);
 
-noLoop();
+//noLoop();
 
 
 
@@ -26,16 +26,27 @@ noFill();
 stroke(0);
 
 
+
+
 int diameter = 20;
 
 for (int i = 0; i < 5; i++) {
-   circle(10 + diameter/2 + i * diameter,
+   purpleCircle(10 + diameter/2 + i * diameter,
            20, diameter);
-          
+
+           
 triangle(116, 10, 126, 30, 106, 30);
 triangle(136, 10, 146, 30, 126, 30);
 
-stroke(3);
+
+for (int j = 0; j < 5; j++) {
+  purpleCircle(154 + i * diameter, 20, diameter);
+}
+
+triangle(250, 10, 260, 30, 240, 30);
+triangle(270, 10, 280, 30, 260, 30);
+
+
            
  
 
@@ -45,6 +56,8 @@ stroke(3);
 
 
 }
+
+
 
  beginShape();
 
@@ -59,8 +72,33 @@ stroke(3);
 
 
 
-
  }
+ 
+ 
+void purpleCircle(float x, float y, float d) {
+  float pulse = (sin(frameCount * 0.05) + 1) / 2;
 
+  for (int py = 0; py < d; py++) {
+    float dy = py - d / 2.0;
+    float halfWidth = sqrt(d * d / 4.0 - dy * dy);
 
-  
+    for (float px = -halfWidth; px <= halfWidth; px++) {
+      float amount = (float) py / d;
+
+      fill(lerpColor(
+        color(100, 0, 180),
+        color(220, 150, 255),
+        amount * pulse
+      ));
+
+      noStroke();
+      rect(x + px, y - d / 2 + py, 1, 1);
+    }
+  }
+
+  noFill();
+  stroke(0);
+  ellipse(x, y, d, d);
+}
+
+ 
