@@ -1,5 +1,4 @@
 void setup(){
-
 size(625,600);
 fill(64);
 noStroke();
@@ -17,7 +16,7 @@ strokeWeight(1);
 
 for (int y = 0; y < height; y++) {
     float t = map(y, 0, height, 0, 1);
-    color c = lerpColor(color(255, 235, 245), color(255, 0, 128), t);
+    color c = lerpColor(color(255, 190, 230), color(255, 105, 180), t);
     stroke(c);
     line(0, y, width, y);
 }
@@ -45,6 +44,34 @@ for (int j = 0; j < 5; j++) {
 
 triangle(250, 10, 260, 30, 240, 30);
 triangle(270, 10, 280, 30, 260, 30);
+
+
+for (int j = 0; j < 5; j++) {
+  purpleCircle(287 + i * diameter, 20, diameter);
+}
+
+triangle(385, 10, 395, 30, 375, 30);
+triangle(405, 10, 415, 30, 395, 30);
+
+
+for (int j = 0; j < 5; j++) {
+  purpleCircle(422 + i * diameter, 20, diameter);
+}
+
+
+triangle(520, 10, 530, 30, 510, 30);
+triangle(540, 10, 550, 30, 530, 30);
+
+
+for (int j = 0; j < 5; j++) {
+  purpleCircle(555 + i * diameter, 20, diameter);
+}
+
+
+
+
+
+
 
 
            
@@ -86,8 +113,8 @@ void purpleCircle(float x, float y, float d) {
       float amount = (float) py / d;
 
       fill(lerpColor(
-        color(100, 0, 180),
-        color(220, 150, 255),
+        color(255, 153, 204),
+        color(255, 20, 147),
         amount * pulse
       ));
 
@@ -100,7 +127,5 @@ void purpleCircle(float x, float y, float d) {
   stroke(0);
   ellipse(x, y, d, d);
 }
-
-
 
  
