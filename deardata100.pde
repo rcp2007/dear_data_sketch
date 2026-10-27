@@ -1,12 +1,5 @@
 void setup(){
 size(625,600);
-fill(64);
-noStroke();
-background(#F7AFF6);
-
-//noLoop();
-
-
 
 }
  void draw(){
@@ -67,11 +60,15 @@ for (int j = 0; j < 5; j++) {
   purpleCircle(555 + i * diameter, 20, diameter);
 }
 
+//zig zag
+line(25, 100, 15, 110);
+line(15, 110, 25, 120);
+line(25, 120, 15, 130);
+line(15, 130, 25, 140);
+line(25, 140, 15, 150);
+line(15, 150, 25, 160);
 
-
-
-
-
+line(21, 90, 21, 170);
 
 
            
@@ -127,5 +124,7 @@ void purpleCircle(float x, float y, float d) {
   stroke(0);
   ellipse(x, y, d, d);
 }
+
+// checking GitHub Desktop
 
  
