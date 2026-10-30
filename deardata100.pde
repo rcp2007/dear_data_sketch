@@ -77,11 +77,7 @@ line(21, 90, 21, 170);
   line(95, 96, 105, 96);
   line(92, 100, 108, 100);
   line(95, 104, 105, 104);
-
-
 }
-
-
 
  beginShape();
 
@@ -91,12 +87,32 @@ line(21, 90, 21, 170);
   }
   
    endShape();
-
-
-
-
-
+   
+   wiggleCircle();
  }
+
+
+void wiggleCircle() {
+
+  stroke(0);
+  strokeWeight(1);
+  noFill();
+
+  ellipse(23,185 , 30, 30);
+
+  for (int y = -6; y <= 6; y += 6) {
+    beginShape();
+
+    for (int x = -10; x <= 10; x++) {
+      float wiggle = sin(x * 0.5) * 3;
+      vertex(23 + x, 185 + y + wiggle);
+    }
+
+    endShape();
+  }
+}
+
+
  
  
 void purpleCircle(float x, float y, float d) {
