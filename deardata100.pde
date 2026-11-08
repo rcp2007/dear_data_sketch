@@ -1,97 +1,85 @@
-void setup(){
-size(625,600);
-
+void setup() {
+  size(625, 600);
 }
- void draw(){
-fill(#F7F7F7);
-stroke(0);
-strokeWeight(1);
 
-for (int y = 0; y < height; y++) {
+void draw() {
+  fill(#F7F7F7);
+  stroke(0);
+  strokeWeight(1);
+
+  for (int y = 0; y < height; y++) {
     float t = map(y, 0, height, 0, 1);
     color c = lerpColor(color(255, 190, 230), color(255, 105, 180), t);
     stroke(c);
     line(0, y, width, y);
-}
+  }
 
-noFill();
-stroke(0);
+  noFill();
+  stroke(0);
 
+  int diameter = 20;
 
+  for (int i = 0; i < 5; i++) {
+    purpleCircle(10 + diameter/2 + i * diameter,
+      20, diameter);
 
+    triangle(116, 10, 126, 30, 106, 30);
+    triangle(136, 10, 146, 30, 126, 30);
 
-int diameter = 20;
+    for (int j = 0; j < 5; j++) {
+      purpleCircle(154 + i * diameter, 20, diameter);
+    }
 
-for (int i = 0; i < 5; i++) {
-   purpleCircle(10 + diameter/2 + i * diameter,
-           20, diameter);
+    triangle(250, 10, 260, 30, 240, 30);
+    triangle(270, 10, 280, 30, 260, 30);
 
-           
-triangle(116, 10, 126, 30, 106, 30);
-triangle(136, 10, 146, 30, 126, 30);
+    for (int j = 0; j < 5; j++) {
+      purpleCircle(287 + i * diameter, 20, diameter);
+    }
 
+    triangle(385, 10, 395, 30, 375, 30);
+    triangle(405, 10, 415, 30, 395, 30);
 
-for (int j = 0; j < 5; j++) {
-  purpleCircle(154 + i * diameter, 20, diameter);
-}
+    for (int j = 0; j < 5; j++) {
+      purpleCircle(422 + i * diameter, 20, diameter);
+    }
 
-triangle(250, 10, 260, 30, 240, 30);
-triangle(270, 10, 280, 30, 260, 30);
+    triangle(520, 10, 530, 30, 510, 30);
+    triangle(540, 10, 550, 30, 530, 30);
 
+    for (int j = 0; j < 5; j++) {
+      purpleCircle(555 + i * diameter, 20, diameter);
+    }
 
-for (int j = 0; j < 5; j++) {
-  purpleCircle(287 + i * diameter, 20, diameter);
-}
+    // zig zag
+    line(25, 100, 15, 110);
+    line(15, 110, 25, 120);
+    line(25, 120, 15, 130);
+    line(15, 130, 25, 140);
+    line(25, 140, 15, 150);
+    line(15, 150, 25, 160);
 
-triangle(385, 10, 395, 30, 375, 30);
-triangle(405, 10, 415, 30, 395, 30);
+    line(21, 90, 21, 170);
 
+    line(40, 28, 40, 58);
+    line(43, 28, 43, 58);
 
-for (int j = 0; j < 5; j++) {
-  purpleCircle(422 + i * diameter, 20, diameter);
-}
+    line(95, 96, 105, 96);
+    line(92, 100, 108, 100);
+    line(95, 104, 105, 104);
+  }
 
-
-triangle(520, 10, 530, 30, 510, 30);
-triangle(540, 10, 550, 30, 530, 30);
-
-
-for (int j = 0; j < 5; j++) {
-  purpleCircle(555 + i * diameter, 20, diameter);
-}
-
-//zig zag
-line(25, 100, 15, 110);
-line(15, 110, 25, 120);
-line(25, 120, 15, 130);
-line(15, 130, 25, 140);
-line(25, 140, 15, 150);
-line(15, 150, 25, 160);
-
-line(21, 90, 21, 170);
-
-
-line(40, 28, 40, 58);
-line(43, 28, 43, 58);
- 
-
-  line(95, 96, 105, 96);
-  line(92, 100, 108, 100);
-  line(95, 104, 105, 104);
-}
-
-
- beginShape();
+  beginShape();
 
   for (int y = 0; y <= 60; y += 2) {
     float x = 22 + sin(y * 0.2) * 3;
     vertex(x, 32 + y);
   }
-  
-   endShape();
-   
-   wiggleCircle();
- }
+
+  endShape();
+
+  wiggleCircle();
+}
 
 
 void wiggleCircle() {
@@ -100,7 +88,7 @@ void wiggleCircle() {
   strokeWeight(1);
   noFill();
 
-  ellipse(23,185 , 30, 30);
+  ellipse(23, 185, 30, 30);
 
   for (int y = -6; y <= 6; y += 6) {
     beginShape();
@@ -115,34 +103,55 @@ void wiggleCircle() {
 }
 
 
- 
- 
+// Original function now creates a class object
 void purpleCircle(float x, float y, float d) {
-  float pulse = (sin(frameCount * 0.05) + 1) / 2;
-
-  for (int py = 0; py < d; py++) {
-    float dy = py - d / 2.0;
-    float halfWidth = sqrt(d * d / 4.0 - dy * dy);
-
-    for (float px = -halfWidth; px <= halfWidth; px++) {
-      float amount = (float) py / d;
-
-      fill(lerpColor(
-        color(255, 153, 204),
-        color(255, 20, 147),
-        amount * pulse
-      ));
-
-      noStroke();
-      rect(x + px, y - d / 2 + py, 1, 1);
-    }
-  }
-
-  noFill();
-  stroke(0);
-  ellipse(x, y, d, d);
+  PurpleCircle myCircle = new PurpleCircle(x, y, d);
+  myCircle.display();
 }
 
-// checking GitHub Desktop
 
- 
+// =================================
+// NEW CLASS
+// =================================
+
+class PurpleCircle {
+
+  float x;
+  float y;
+  float d;
+
+  // Constructor
+  PurpleCircle(float circleX, float circleY, float diameter) {
+    x = circleX;
+    y = circleY;
+    d = diameter;
+  }
+
+  // Display method
+  void display() {
+
+    float pulse = (sin(frameCount * 0.05) + 1) / 2;
+
+    for (int py = 0; py < d; py++) {
+      float dy = py - d / 2.0;
+      float halfWidth = sqrt(d * d / 4.0 - dy * dy);
+
+      for (float px = -halfWidth; px <= halfWidth; px++) {
+        float amount = (float) py / d;
+
+        fill(lerpColor(
+          color(255, 153, 204),
+          color(255, 20, 147),
+          amount * pulse
+        ));
+
+        noStroke();
+        rect(x + px, y - d / 2 + py, 1, 1);
+      }
+    }
+
+    noFill();
+    stroke(0);
+    ellipse(x, y, d, d);
+  }
+}
