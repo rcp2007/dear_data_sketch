@@ -42,9 +42,9 @@ void draw() {
     float x = 65 + col * 80;
 
     // Stem
-    stroke(85, 140, 90);
-    strokeWeight(3);
-    line(x, 125, x, 590);
+    stroke(#7C4818);
+    strokeWeight(2);
+    line(x, 125, x, 610);
 
     // Ten data points per stem
     for (int row = 0; row < 10; row++) {
