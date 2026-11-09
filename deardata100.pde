@@ -1,157 +1,168 @@
+int[] emotions = {
+  0,2,0,1,2,3,0,4,2,0,
+  1,2,3,0,2,4,0,1,2,3,
+  0,0,2,1,4,2,3,0,1,2,
+  3,2,0,4,1,2,0,3,2,1,
+  0,2,4,3,1,0,2,2,3,0,
+  1,0,2,4,3,2,0,1,2,0,
+  3,2,1,0,4,2,3,1,0,2,
+  2,0,3,4,1,2,0,2,3,1,
+  0,4,2,1,3,0,2,1,4,2,
+  3,0,2,1,0,4,2,3,1,0
+};
+
+int[] environments = {
+  0,0,1,0,2,1,0,3,1,0,
+  2,1,0,4,0,1,2,0,3,1,
+  0,2,1,0,5,1,0,2,3,0,
+  1,0,2,4,1,0,3,1,0,2,
+  0,1,3,0,2,1,4,0,1,2,
+  0,3,1,0,2,5,0,1,3,0,
+  2,0,1,4,0,2,1,3,0,1,
+  0,2,3,1,0,4,2,0,1,3,
+  0,1,2,0,3,1,0,2,4,1,
+  0,3,1,2,0,5,1,0,2,3
+};
+
 void setup() {
-  size(625, 600);
+  size(850, 700);
+  noLoop();
 }
 
 void draw() {
-  fill(#F7F7F7);
-  stroke(0);
-  strokeWeight(1);
+  background(255, 230, 242);
 
-  for (int y = 0; y < height; y++) {
-    float t = map(y, 0, height, 0, 1);
-    color c = lerpColor(color(255, 190, 230), color(255, 105, 180), t);
-    stroke(c);
-    line(0, y, width, y);
+  // Ground
+  noStroke();
+  fill(180, 210, 150);
+  rect(0, 610, width, 90);
+
+  // Ten vertical stems
+  for (int col = 0; col < 10; col++) {
+    float x = 65 + col * 80;
+
+    // Stem
+    stroke(85, 140, 90);
+    strokeWeight(3);
+    line(x, 125, x, 590);
+
+    // Ten data points per stem
+    for (int row = 0; row < 10; row++) {
+      int index = col * 10 + row;
+      float y = 145 + row * 44;
+
+      int emotion = emotions[index];
+      int environment = environments[index];
+
+      drawSymbol(x, y, emotion, environment);
+    }
+
+    // Flower at the top
+    Flower flower = new Flower(x, 110, col);
+    flower.display();
   }
 
-  noFill();
-  stroke(0);
+  // Ground decorations
+  noStroke();
+  fill(255, 190, 110);
 
-  int diameter = 20;
-
-  for (int i = 0; i < 5; i++) {
-    purpleCircle(10 + diameter/2 + i * diameter,
-      20, diameter);
-
-    triangle(116, 10, 126, 30, 106, 30);
-    triangle(136, 10, 146, 30, 126, 30);
-
-    for (int j = 0; j < 5; j++) {
-      purpleCircle(154 + i * diameter, 20, diameter);
-    }
-
-    triangle(250, 10, 260, 30, 240, 30);
-    triangle(270, 10, 280, 30, 260, 30);
-
-    for (int j = 0; j < 5; j++) {
-      purpleCircle(287 + i * diameter, 20, diameter);
-    }
-
-    triangle(385, 10, 395, 30, 375, 30);
-    triangle(405, 10, 415, 30, 395, 30);
-
-    for (int j = 0; j < 5; j++) {
-      purpleCircle(422 + i * diameter, 20, diameter);
-    }
-
-    triangle(520, 10, 530, 30, 510, 30);
-    triangle(540, 10, 550, 30, 530, 30);
-
-    for (int j = 0; j < 5; j++) {
-      purpleCircle(555 + i * diameter, 20, diameter);
-    }
-
-    // zig zag
-    line(25, 100, 15, 110);
-    line(15, 110, 25, 120);
-    line(25, 120, 15, 130);
-    line(15, 130, 25, 140);
-    line(25, 140, 15, 150);
-    line(15, 150, 25, 160);
-
-    line(21, 90, 21, 170);
-
-    line(40, 28, 40, 58);
-    line(43, 28, 43, 58);
-
-    line(95, 96, 105, 96);
-    line(92, 100, 108, 100);
-    line(95, 104, 105, 104);
+  for (int i = 0; i < 15; i++) {
+    ellipse(i * 60, 625 + (i % 3) * 10, 5, 5);
   }
-
-  beginShape();
-
-  for (int y = 0; y <= 60; y += 2) {
-    float x = 22 + sin(y * 0.2) * 3;
-    vertex(x, 32 + y);
-  }
-
-  endShape();
-
-  wiggleCircle();
 }
 
+// FLOWER HEADS
+void drawFlower(float x, float y, int type) {
+  color[] pinkShades = {
+    color(255, 200, 220),  // Baby pink
+    color(255, 160, 195),  // Soft pink
+    color(245, 120, 175),  // Rose pink
+    color(220, 75, 145),   // Deep pink
+    color(190, 45, 115)    // Dark pink
+  };
 
-void wiggleCircle() {
+  noStroke();
 
-  stroke(0);
-  strokeWeight(1);
-  noFill();
+  // Five petals with different pink shades
+  for (int i = 0; i < 5; i++) {
+    float angle = TWO_PI * i / 5;
+    fill(pinkShades[(i + type) % 5]);
+    ellipse(
+      x + cos(angle) * 9,
+      y + sin(angle) * 9,
+      15, 15
+    );
+  }
 
-  ellipse(23, 185, 30, 30);
+  // Dark pink flower centre
+  fill(170, 35, 100);
+  ellipse(x, y, 11, 11);
+}
 
-  for (int y = -6; y <= 6; y += 6) {
+void drawSymbol(float x, float y, int emotion, int environment) {
+  color[] pinks = {
+    color(255, 190, 215),
+    color(255, 150, 190),
+    color(240, 110, 165),
+    color(220, 75, 140),
+    color(190, 45, 115),
+    color(255, 215, 230)
+  };
+
+  float s = 19;
+
+  pushStyle();
+  fill(pinks[environment]);
+  stroke(90, 35, 100);
+  strokeWeight(1.5);
+
+  if (emotion == 0) {
+    // Circle
+    ellipse(x, y, s, s);
+  } else if (emotion == 1) {
+    // Triangle
+    triangle(
+      x, y - s/2,
+      x + s/2, y + s/2,
+      x - s/2, y + s/2
+    );
+  } else if (emotion == 2) {
+    // Square
+    rectMode(CENTER);
+    rect(x, y, s, s);
+  } else if (emotion == 3) {
+    // Diamond
+    quad(
+      x, y - s/2,
+      x + s/2, y,
+      x, y + s/2,
+      x - s/2, y
+    );
+  } else if (emotion == 4) {
+    // Zigzag
+    noFill();
     beginShape();
-
-    for (int x = -10; x <= 10; x++) {
-      float wiggle = sin(x * 0.5) * 3;
-      vertex(23 + x, 185 + y + wiggle);
+    for (int i = 0; i < 5; i++) {
+      vertex(x - s/2 + i * 5, y + (i % 2 == 0 ? -7 : 7));
     }
-
     endShape();
   }
+
+  popStyle();
 }
 
-
-// Original function now creates a class object
-void purpleCircle(float x, float y, float d) {
-  PurpleCircle myCircle = new PurpleCircle(x, y, d);
-  myCircle.display();
-}
-
-
-// =================================
-// NEW CLASS
-// =================================
-
-class PurpleCircle {
-
+class Flower {
   float x;
   float y;
-  float d;
+  int type;
 
-  // Constructor
-  PurpleCircle(float circleX, float circleY, float diameter) {
-    x = circleX;
-    y = circleY;
-    d = diameter;
+  Flower(float x, float y, int type) {
+    this.x = x;
+    this.y = y;
+    this.type = type;
   }
 
-  // Display method
   void display() {
-
-    float pulse = (sin(frameCount * 0.05) + 1) / 2;
-
-    for (int py = 0; py < d; py++) {
-      float dy = py - d / 2.0;
-      float halfWidth = sqrt(d * d / 4.0 - dy * dy);
-
-      for (float px = -halfWidth; px <= halfWidth; px++) {
-        float amount = (float) py / d;
-
-        fill(lerpColor(
-          color(255, 153, 204),
-          color(255, 20, 147),
-          amount * pulse
-        ));
-
-        noStroke();
-        rect(x + px, y - d / 2 + py, 1, 1);
-      }
-    }
-
-    noFill();
-    stroke(0);
-    ellipse(x, y, d, d);
+    drawFlower(x, y, type);
   }
 }
